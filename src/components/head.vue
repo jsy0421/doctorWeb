@@ -10,6 +10,7 @@
 
 <script>
 	export default {
+		name: 'Head',
 		data() {
 			return {
 				avatarUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
@@ -55,7 +56,7 @@
 		box-shadow: 1px 1px 10px #888888;
 	}
 
-	button {
+	.makeMedicine,.record {
 		width: 10%;
 		height: 100%;
 		background-color: #6699CC;
@@ -64,11 +65,11 @@
 		font-size: 20px;
 	}
 
-	button:hover {
+	.makeMedicine:hover,.record:hover {
 		background-color: #87a5cc;
 	}
 
-	i {
+	.makeMedicine,.record i {
 		padding-right: 10px;
 	}
 
