@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Head from '../views/Head.vue'
+import Login from '../views/login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'Login',
+    component: Login
+  },{
     path: '/',
     name: 'Head',
     component: Head
