@@ -4,6 +4,7 @@ import Head from '../views/Head.vue'
 import Login from '../views/login.vue'
 import form from '../views/form.vue'
 import detail from '../views/detail.vue'
+import consultRecords from '../views/consultRecords.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/detail',
     name: 'datail',
     component: detail
+  },
+  {
+    path: '/consultRecords',
+    name: 'consultRecords',
+    component: consultRecords
   }
 ]
 
