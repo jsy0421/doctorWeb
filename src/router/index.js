@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Head from '../views/Head.vue'
 import Login from '../views/login.vue'
 import form from '../views/form.vue'
+import detail from '../views/detail.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/detail',
+    name: 'datail',
+    component: detail
   }
 ]
 
