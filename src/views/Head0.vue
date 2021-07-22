@@ -12,28 +12,14 @@
 
 <script>
 	export default {
-		props: {
-			avatarUrl: {  //医生头像
-				type: String
-			},
-			doctorName: {  //医生姓名
-				type: String
-			},
-			doctorPosition: {  //医生职位
-				type: String
-			},
-			currentPage: {  //当前界面 1 —— 复诊配药；2 —— 接诊记录
-				type: Number
+		data() {
+			return {
+				avatarUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',  //医生头像
+				doctorName: '医生姓名',  //医生姓名
+				doctorPosition: '职位',  //医生职位
+				currentPage:1 //当前界面 1 —— 复诊配药；2 —— 接诊记录
 			}
 		}
-		// data() {
-		// 	return {
-		// 		avatarUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-		// 		doctorName: '医生姓名',
-		// 		doctorPosition: '职位',
-		// 		currentPage:2
-		// 	}
-		// }
 	}
 </script>
 
