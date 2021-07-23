@@ -93,7 +93,7 @@ export default {
   methods: {},
   filters: {
     dateFormat(date) {
-      return date.substring(0, 10) + date.substring(10, 8);
+      return date.substring(0, 10) + date.substring(10, 16);
     },
     typeFormat(type) {
       if (type === 1) {

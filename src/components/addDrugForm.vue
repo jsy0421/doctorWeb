@@ -1,24 +1,11 @@
 <!--  -->
 <template>
   <div class="formbody">
-    <myhead></myhead>
     <div class="form">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="药方类型">
-          <el-col :span="20">
-            <el-radio-group v-model="form.type">
-              <el-radio border label="西药方"></el-radio>
-              <el-radio border label="中成药方"></el-radio>
-            </el-radio-group>
-          </el-col>
-        </el-form-item>
+      <el-form ref="form" :model="form" label-width="100px" border='true'
+      fit="false" align="center">
         <el-form-item label="药品">
-          <el-col :span="20">
-            <el-select v-model="form.drug" placeholder="选择药品">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
-          </el-col>
+          <el-button @click="drawer = true" style="width:100px">选择药品</el-button>
         </el-form-item>
         <el-form-item label="频次">
           <el-radio-group
@@ -40,56 +27,58 @@
         </el-form-item>
         <el-form-item label="剂量">
           <el-input-number
-            v-model="form.dose"
-            :min="1"
-            :max="10"
-            label="描述文字"
+            v-model="form.dose" style="margin-top:0px"
           ></el-input-number>
         </el-form-item>
         <el-form-item label="用药天数(天)">
+            <el-col :span="8"></el-col>
           <el-input-number
             v-model="form.takeDays"
-            :min="1"
-            :max="10"
-            label="描述文字"
           ></el-input-number>
         </el-form-item>
         <el-form-item label="总量(盒)">
           <el-input-number
             v-model="form.quantity"
-            :min="1"
-            :max="10"
-            label="描述文字"
           ></el-input-number>
         </el-form-item>
         <el-form-item label="备注">
           <el-input type="textarea" v-model="form.remark"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
-        </el-form-item>
+        <div class="form_button" @click="submitDrug">
+          <span>提交药品</span>
+        </div>
       </el-form>
     </div>
+    <el-drawer
+      title="我是标题"
+      :visible.sync="drawer"
+      direction="rtl"
+      append-to-body
+    >
+      <div
+        class="drawer_item"
+        v-for="(item,index) in drugList"
+        :key="index"
+        @click="chooseDrug"
+      >
+      <div class="lh30">药品名 {{item.drugName}}</div>
+        <div class="lh30">药品厂家 {{item.factoryName}}</div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
 <script>
 // 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等)
-import myhead from "../components/head.vue";
 export default {
   // import引入的组件需要注入到对象中才能使用
-  components: {
-    myhead,
-  },
+  components: {},
   data() {
     return {
+      drawer: false,
       form: {
         name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        dose: 1.02,
+        dose: 1.0,
         usageName: [],
         frequencyName: [],
         takeDays: 0,
@@ -100,6 +89,8 @@ export default {
       },
       frequencyList: [],
       usageList: [],
+      drugList:[],
+      subDrugList:[]
     };
   },
 
@@ -111,6 +102,15 @@ export default {
     onSubmit() {
       console.log("submit!");
     },
+    chooseDrug()
+    {
+      this.drawer=true
+    },
+    submitDrug()
+    {
+      this.subDrugList.push(this.form);
+      this.drawer=false;
+    }
   },
   mounted() {
     this.$http.get("usage/list").then(({ data }) => {
@@ -122,6 +122,20 @@ export default {
     this.$http.get(`drug/search/${this.keyword}`).then(({ data }) => {
       this.form.frequencyList = data.result;
     });
+    this.$http.get(`/drug/page?page=1&size=20`)
+      .then(({ data }) => {
+        console.log(data);
+        this. drugList= data.result.records;
+      });
+    this.$http.post(`prescribe/`, {}).then(({ data }) => {
+      if (data.code === 200) {
+        this.$message({
+          showClose: true,
+          message: "恭喜你，这是一条成功消息",
+          type: "success",
+        });
+      }
+    });
   },
 };
 </script>
@@ -130,10 +144,22 @@ export default {
 .formbody {
   .form {
     font-size: 24px;
-    width: 1200px;
-    margin: 30px auto;
-    background-color: #eee;
-    padding: 15px 50px;
+    width: 500px;
+    padding: 15px 50px; 
+    .form_button{
+    text-align: right;
+    span{
+    color: #fff;
+    border-radius: 10px ;
+        background-color: #6699cc;
+        padding: 10px;
+    }
+    }
   }
 }
+.drawer_item{
+  height: 80px;
+  padding: 10px 40px;
+}
+
 </style>

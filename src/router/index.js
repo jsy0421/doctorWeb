@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Head from '../views/Head.vue'
 import Login from '../views/login.vue'
-import form from '../views/form.vue'
 import detail from '../views/detail.vue'
+import prescribe from '../views/prescribe.vue'
 import consultRecords from '../views/consultRecords.vue'
 
 Vue.use(VueRouter)
@@ -14,11 +14,7 @@ const routes = [
     name: 'Head',
     component: Head
   },
-  {
-    path: '/form',
-    name: 'form',
-    component: form
-  },
+ 
   {
     path: '/',
     name: 'Login',
@@ -33,6 +29,11 @@ const routes = [
     path: '/consultRecords',
     name: 'consultRecords',
     component: consultRecords
+  },
+  {
+    path: '/prescribe',
+    name: 'prescribe',
+    component: prescribe
   }
 ]
 
