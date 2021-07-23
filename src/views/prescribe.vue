@@ -4,9 +4,28 @@
     <myhead></myhead>
     <el-container>
       <el-aside class="aside">
-        <div class="prescribe_aside_font">西药方</div>
-        <div class="prescribe_aside_font">中成药方</div>
-        <div class="prescribe_aside_font">已提交</div>
+          <el-menu
+      default-active="1"
+      class="prescribe_aside"
+      background-color="#6699cc"
+      text-color="#fff"
+       active-text-color="#85add6"
+    >
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>新增处方</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="1-1">西药方</el-menu-item>
+          <el-menu-item index="1-2">中成药方</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-menu-item index="2">
+        <i class="el-icon-menu"></i>
+        <span slot="title">已提交</span>
+      </el-menu-item>
+          </el-menu>
       </el-aside>
       <el-main>
         <h3>设置处方</h3>
@@ -20,13 +39,12 @@
             <span>删除处方</span>
           </div>
         </myform>
-         <div class="form_button" @click="submitPre">
-          <span>提交药品</span>
-        </div>
+         <mybutton class="prescribe_bottom_button" @click="submitPre" text="提交处方">
+        </mybutton>
       </el-main>
     </el-container>
-    <el-dialog  :visible.sync="dialogFormVisible">
-      <addDrugForm></addDrugForm>
+    <el-dialog  :visible.sync="dialogFormVisible" >
+      <addDrugForm @sub="dialogClose"></addDrugForm>
 </el-dialog>
   </div>
 </template>
@@ -34,26 +52,27 @@
 <script>
 // 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等)
 import myhead from "../components/head.vue";
+import mybutton from "../components/mybutton.vue";
 import myform from "../components/baseDrugForm.vue";
 import addDrugForm from "../components/addDrugForm.vue";
 export default {
   // import引入的组件需要注入到对象中才能使用
-  components: { myhead, myform, addDrugForm},
+  components: { myhead, myform, addDrugForm,mybutton},
   data() {
     return {
       dialogFormVisible:false,
       drugList: [
-        {
-          drugName: "阿莫西林",
-          specification: "xx",
-          drugId: "1",
-          dose: "1.00",
-          frequencyName: "bid",
-          usageName: "口服",
-          takeDays: "1",
-          quantity: "1",
-          remark: "",
-        },
+        // {
+        //   drugName: "",
+        //   specification: "",
+        //   drugId: "-1",
+        //   dose: "",
+        //   frequencyName: "",
+        //   usageName: "",
+        //   takeDays: "",
+        //   quantity: "",
+        //   remark: "",
+        // },
       ],
     };
   },
@@ -70,7 +89,14 @@ export default {
     submitPre()
     {
       
+    },
+    dialogClose(e)
+    {
+      console.log(e);
+      this.drugList.push(e);
+      this.dialogFormVisible=false;
     }
+    
   },
   mounted() {},
 };
@@ -78,7 +104,8 @@ export default {
 <style lang="scss" scoped>
 /* @import url(); 引入公共css类 */
 .prescribe{
-  height: 600px;
+  height: 800px;
+  background: "../assets/background.jpg" no-repeat;
 }
 .aside {
   height: 500px;
@@ -87,9 +114,14 @@ export default {
  flex-direction: column;
  justify-content: center;
 }
-.prescribe_aside_font {
+.prescribe_aside {
   color: #fff;
   font-weight: 700;
   line-height: 60px;
+}
+.prescribe_bottom_button{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
 }
 </style>

@@ -177,7 +177,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container-content {
   height: 270px;
 }

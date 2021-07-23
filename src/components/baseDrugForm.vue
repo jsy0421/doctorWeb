@@ -26,12 +26,12 @@
           <span class="mr60">用法 {{ item.usageName }}</span>
           <span> 频率 {{ item.frequencyName }}</span>
         </div>
+        <el-divider></el-divider>
+      </div>
+      <div class="baseform_body_bottom">
+        <slot name="footer"></slot>
       </div>
     </div>
-    <div class="textRight">
-      <slot name="footer" ></slot>
-    </div>
-    
   </div>
 </template>
 
@@ -57,6 +57,9 @@ export default {
 <style lang="scss" scoped>
 /* @import url(); 引入公共css类 */
 .baseform {
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
 }
 .baseform_title {
   background-color: #ccccff;
@@ -71,5 +74,9 @@ export default {
 .baseform_body {
   text-align: left;
   padding: 30px 50px;
+  .baseform_body_bottom {
+    text-align: right;
+    margin-top: 60px;
+  }
 }
 </style>
