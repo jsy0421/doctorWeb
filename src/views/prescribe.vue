@@ -17,8 +17,8 @@
           <span>新增处方</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="1-1">西药方</el-menu-item>
-          <el-menu-item index="1-2">中成药方</el-menu-item>
+          <el-menu-item index="1-1" @click="xiyaoclick">西药方</el-menu-item>
+          <el-menu-item index="1-2" @click="zhongyaoclick">中成药方</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="2">
@@ -61,6 +61,7 @@ export default {
   data() {
     return {
       dialogFormVisible:false,
+      prescriptionList:[],
       drugList: [
         // {
         //   drugName: "",
@@ -74,6 +75,7 @@ export default {
         //   remark: "",
         // },
       ],
+      finishList:[],
     };
   },
 
@@ -88,17 +90,36 @@ export default {
     },
     submitPre()
     {
-      
+
     },
     dialogClose(e)
     {
       console.log(e);
       this.drugList.push(e);
       this.dialogFormVisible=false;
+    },
+    xiyaoclick()
+    {
+        let newPrecription={
+            prescriptionType:"1"
+        };
+        this.prescriptionList.push(newPrecription);
+
+    },
+     zhongyaoclick()
+    {
+       let newPrecription={
+            prescriptionType:"2"
+        };
+          this.prescriptionList.push(newPrecription);
     }
     
   },
-  mounted() {},
+  mounted(data) {
+    this.$
+    console.log(data);
+
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -121,7 +142,7 @@ export default {
 }
 .prescribe_bottom_button{
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     right: 10px;
 }
 </style>
